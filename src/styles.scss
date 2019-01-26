@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+html,body,h1,h2,h3,h4,h5 {
+    font-family: 'Roboto', sans-serif;
+}
+
+.w3-bar-block .w3-bar-item {
+    padding: 16px
+}

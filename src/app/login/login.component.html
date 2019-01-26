@@ -1,0 +1,32 @@
+<div class="w3-container">
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+  
+      <div class="w3-center"><br>
+        <img src="../../assets/img/img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      </div>
+
+      <form class="w3-container" #loginForm="ngForm">
+        <div class="w3-section">
+          <label><b>Email</b></label>
+          <label *ngIf="email.errors && (email.dirty || email.touched)" style="color: red;">
+            <label [hidden]="!email.errors.required">
+              * Email is required
+            </label>
+            <label [hidden]="!email.errors.email">
+              * Email must be email.
+            </label>
+          </label>
+          <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter Username" [(ngModel)]="login.email" #email="ngModel" name="email" required email>
+          <label><b>Password</b></label>
+          <label [hidden]="password.valid || password.pristine" style="color: red;">
+            * Password is required
+          </label>
+          <input class="w3-input w3-border" type="text" placeholder="Enter Password" [(ngModel)]="login.password" #password="ngModel" name="password" required>
+          <button class="w3-btn w3-block w3-purple w3-section w3-padding" type="submit" (click)="loggingIn()" [disabled]="loginForm.form.invalid" >Login</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
