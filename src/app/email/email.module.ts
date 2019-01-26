@@ -7,11 +7,18 @@ import { ContentComponent } from './content/content.component';
 import { NewEmailComponent } from './new-email/new-email.component';
 import { EmailComponent } from './email.component';
 
+// ngrx
+import { StoreModule } from '@ngrx/store';
+import { emailReducer } from '../reducers/email.reducer';
+
 @NgModule({
   declarations: [LeftBarComponent, ContentComponent, NewEmailComponent, EmailComponent],
   imports: [
     CommonModule,
-    EmailRoutingModule
+    EmailRoutingModule,
+    StoreModule.forRoot({
+      post: emailReducer, /// <--- add reducer here
+    })
   ]
 })
 export class EmailModule { }

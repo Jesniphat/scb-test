@@ -12,4 +12,8 @@ export class NewEmailComponent implements OnInit {
   ngOnInit() {
   }
 
+  public close(): void {
+    document.getElementById('id01').style.display = 'none';
+  }
+
 }
