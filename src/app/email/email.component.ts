@@ -16,6 +16,8 @@ export class EmailComponent implements OnInit, OnDestroy {
   public email$: any;
   public siteBar$: any;
 
+  public id01 = 'none';
+
   constructor(private rootScope: RootScopeService) { }
 
   ngOnInit() {
@@ -25,9 +27,9 @@ export class EmailComponent implements OnInit, OnDestroy {
 
   public newEmail(isShow: boolean): void {
     if (isShow) {
-      document.getElementById('id01').style.display = 'block';
+      this.id01 = 'block';
     } else {
-      document.getElementById('id01').style.display = 'none';
+      this.id01 = 'none';
     }
   }
 

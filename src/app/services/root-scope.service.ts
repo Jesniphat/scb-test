@@ -28,7 +28,7 @@ export class RootScopeService {
  * Show new email dialog
  * @param isShow: boolean
  */
-  public loginShow(isShow: boolean): void {
+  public newEmailShow(isShow: boolean): void {
     this._newEmail.next(isShow);
   }
 

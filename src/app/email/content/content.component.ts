@@ -13,13 +13,11 @@ export class ContentComponent implements OnInit {
   ngOnInit() {
   }
 
-  public w3_open(): void {
-    document.getElementById('mySidebar').style.display = 'block';
-    document.getElementById('myOverlay').style.display = 'block';
-  }
-
   public openSiteBar(): void {
     this.rootScope.showSiteBar('block');
   }
 
+  public newEmail(): void {
+    this.rootScope.newEmailShow(true);
+  }
 }

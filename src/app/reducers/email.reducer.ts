@@ -9,7 +9,6 @@ const defaultState: Email = {
 };
 
 export function emailReducer(state: Email = defaultState, action: Action): any {
-  console.log(action);
   switch (action.type) {
     case EmailActions.NEW_EMAIL:
       return {

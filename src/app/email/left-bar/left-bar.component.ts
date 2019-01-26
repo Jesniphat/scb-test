@@ -23,7 +23,7 @@ export class LeftBarComponent implements OnInit {
   }
 
   public newEmail(): void {
-    this.rootScope.loginShow(true);
+    this.rootScope.newEmailShow(true);
   }
 
 }
