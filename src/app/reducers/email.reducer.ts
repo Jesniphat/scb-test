@@ -30,6 +30,10 @@ const defaultState: EmailAction = {
     to: '',
     subject: '',
     body: ''
+  },
+  forward: {
+    subject: '',
+    body: ''
   }
 };
 
@@ -57,6 +61,12 @@ export function emailReducer(state: EmailAction = defaultState, action: Action):
       return {
       ...state,
       reply: action.payload
+    };
+
+    case EmailActions.FORWARD_EMAIL:
+    return {
+      ...state,
+      forward: action.payload
     };
 
     case EmailActions.RESET:

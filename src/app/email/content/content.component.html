@@ -14,7 +14,7 @@
       <h5 class="w3-opacity">Subject: {{e.content.subject}}</h5>
       <h4><i class="fa fa-clock-o"></i> {{e.content.type === 'send' ? 'To' : 'From'}} {{e.content.from.name}} <{{e.content.from.email}}>, {{e.content.datetime}}.</h4>
       <button class="w3-button w3-light-grey" (click)="reply(e.content.from.email, e.content.subject, e.content.body)">Reply<i class="w3-margin-left fa fa-mail-reply"></i></button>
-      <a class="w3-button w3-light-grey" href="#">Forward<i class="w3-margin-left fa fa-arrow-right"></i></a>
+      <button class="w3-button w3-light-grey" (click)="forward(e.content.subject, e.content.body)">Forward<i class="w3-margin-left fa fa-arrow-right"></i></button>
       <hr>
       <p>{{e.content.body}}</p>
     </div>

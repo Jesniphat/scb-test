@@ -4,6 +4,7 @@ export const NEW_EMAIL  = '[Email] New';
 export const SHOW_SITEBAR = '[Email] ShowSitebar';
 export const READ_EMAIL   = '[Email] Read';
 export const REPLY_EMAIL = '[Email] Reply';
+export const FORWARD_EMAIL = '[Email Forword';
 export const RESET      = '[Email] Reset';
 
 
@@ -33,9 +34,15 @@ export class ReplyEmail implements Action {
   constructor(public payload: any) {}
 }
 
+export class ForwardEmail implements Action {
+  readonly type = FORWARD_EMAIL;
+
+  constructor(public payload: any) {}
+}
+
 export class Reset implements Action {
   readonly type = RESET;
 }
 
 
-export type All = ShowSitebar | NewEmail | ReadEmail | ReplyEmail | Reset;
+export type All = ShowSitebar | NewEmail | ReadEmail | ReplyEmail | ForwardEmail | Reset;

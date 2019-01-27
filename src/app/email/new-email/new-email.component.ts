@@ -29,17 +29,30 @@ export class NewEmailComponent implements OnInit, OnDestroy {
   };
 
   public email$: any;
+  private reply = false;
+  private forward = false;
 
   constructor(
     private store_email: Store<EmailState>,
     private api: ApiService,
     private alert: AlertsService
   ) {
+    const that = this;
     this.email$ = this.store_email.select('email').subscribe(data => {
       if (data.reply.to && data.reply.subject && data.reply.body) {
         this.sending.to.email = data.reply.to;
         this.sending.subject = data.reply.subject;
         this.sending.body = data.reply.body;
+        that.reply = true;
+      } else if (data.forward.subject && data.forward.body) {
+        this.sending.to.email = '';
+        this.sending.subject = data.forward.subject;
+        this.sending.body = data.forward.body;
+        that.forward = true;
+      } else {
+        this.sending.to.email = '';
+        this.sending.subject = '';
+        this.sending.body = '';
       }
     });
   }
@@ -47,18 +60,23 @@ export class NewEmailComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  public close(): void {
+  public async close(): Promise<void> {
     this.store_email.dispatch(new EmailActions.NewEmail(false));
-  }
+    if (this.reply) {
+      this.store_email.dispatch(new EmailActions.ReplyEmail({to: '', subject: '', body: ''}));
+      this.reply = false;
+    }
 
-  public cancel(): void {
-    this.store_email.dispatch(new EmailActions.NewEmail(false));
+    if (this.forward) {
+      this.store_email.dispatch(new EmailActions.ForwardEmail({subject: '', body: ''}));
+      this.forward = false;
+    }
   }
 
   public async sendEmail(): Promise<void> {
     this.sending.datetime = moment().format('ll');
     await this.api.addEmail(this.sending).toPromise();
-    await this.store_email.dispatch(new EmailActions.NewEmail(false));
+    await this.close();
     await this.reset();
     await this.alert.success('Email sent.');
   }

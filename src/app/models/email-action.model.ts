@@ -4,5 +4,13 @@ export interface EmailAction {
     newEmail: boolean;
     showSitebar: string;
     content?: Email;
-    reply: any;
+    reply: {
+        to: string;
+        subject: string;
+        body: string;
+    };
+    forward: {
+        subject: string;
+        body: string;
+    };
 }

@@ -31,4 +31,9 @@ export class ContentComponent implements OnInit {
     this.store_email.dispatch(new EmailActions.ReplyEmail({to: to, subject: subject, body: body }));
     this.store_email.dispatch(new EmailActions.NewEmail(true));
   }
+
+  public forward(subject: string, body: string): void {
+    this.store_email.dispatch(new EmailActions.ForwardEmail({subject: subject, body: body }));
+    this.store_email.dispatch(new EmailActions.NewEmail(true));
+  }
 }
