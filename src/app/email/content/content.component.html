@@ -1,18 +1,22 @@
-<div class="w3-main" style="margin-left:320px;">
+<div class="w3-main" style="margin-left:320px;" *ngIf="emailContent$ | async as e">
   <i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top" (click)="openSiteBar()"></i>
-  <div class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" (click)="newEmail()"><i class="fa fa-pencil"></i></div>
-  
-  <div id="Borge" class="w3-container person">
-    <br>
-    <img class="w3-round  w3-animate-top" src="/w3images/avatar3.png" style="width:20%;">
-    <h5 class="w3-opacity">Subject: Remember Me</h5>
-    <h4><i class="fa fa-clock-o"></i> From Borge Refsnes, Sep 27, 2015.</h4>
-    <a class="w3-button w3-light-grey" href="#">Reply<i class="w3-margin-left fa fa-mail-reply"></i></a>
-    <a class="w3-button w3-light-grey" href="#">Forward<i class="w3-margin-left fa fa-arrow-right"></i></a>
-    <hr>
-    <p>Hello, i just wanted to let you know that i'll be home at lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    <p>Best Regards, <br>Borge Refsnes</p>
+  <div *ngIf="e.content.id != null">
+    <div class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" (click)="newEmail()"><i class="fa fa-pencil"></i></div>
+    
+    <div id="Borge" class="w3-container person">
+      <br>
+      <!-- <img class="w3-round  w3-animate-top" src="/w3images/avatar3.png" style="width:20%;"> -->
+      <div *ngIf="!e.content.img" class="w3-bar-item w3-circle email-icon" 
+      [ngStyle]="{'background-color': e.content.color, 'width': '50px', 'height': '50px', 'padding': '15px 0px 0px 0px', 'color': 'white', 'text-align': 'center'}">
+        {{e.content.short}}
+      </div>
+      <div *ngIf="e.content.img" class="w3-bar-item w3-circle email-icon" [ngStyle]="{'width': '50px', 'height': '50px'}"><img height="50px" src={{e.content.img}} /></div>
+      <h5 class="w3-opacity">Subject: {{e.content.subject}}</h5>
+      <h4><i class="fa fa-clock-o"></i> {{e.content.type === 'send' ? 'To' : 'From'}} {{e.content.from.name}} <{{e.content.from.email}}>, {{e.content.datetime}}.</h4>
+      <button class="w3-button w3-light-grey" (click)="reply(e.content.from.email, e.content.subject, e.content.body)">Reply<i class="w3-margin-left fa fa-mail-reply"></i></button>
+      <a class="w3-button w3-light-grey" href="#">Forward<i class="w3-margin-left fa fa-arrow-right"></i></a>
+      <hr>
+      <p>{{e.content.body}}</p>
+    </div>
   </div>
-       
 </div>

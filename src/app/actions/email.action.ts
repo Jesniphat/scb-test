@@ -1,9 +1,10 @@
 import { Action } from '@ngrx/store';
 
-export const NEW_EMAIL  = '[Post] New';
-export const UPVOTE     = '[Post] Upvote';
-export const DOWNVOTE   = '[Post] Downvote';
-export const RESET      = '[Post] Reset';
+export const NEW_EMAIL  = '[Email] New';
+export const SHOW_SITEBAR = '[Email] ShowSitebar';
+export const READ_EMAIL   = '[Email] Read';
+export const REPLY_EMAIL = '[Email] Reply';
+export const RESET      = '[Email] Reset';
 
 
 export class NewEmail implements Action {
@@ -14,16 +15,27 @@ export class NewEmail implements Action {
 }
 
 
-export class Upvote implements Action {
-  readonly type = UPVOTE;
+export class ShowSitebar implements Action {
+  readonly type = SHOW_SITEBAR;
+
+  constructor(public payload: string) {}
 }
 
-export class Downvote implements Action {
-  readonly type = DOWNVOTE;
+export class ReadEmail implements Action {
+  readonly type = READ_EMAIL;
+
+  constructor(public payload: any) {}
+}
+
+export class ReplyEmail implements Action {
+  readonly type = REPLY_EMAIL;
+
+  constructor(public payload: any) {}
 }
 
 export class Reset implements Action {
   readonly type = RESET;
 }
 
-export type All = Upvote | Downvote | Reset | NewEmail;
+
+export type All = ShowSitebar | NewEmail | ReadEmail | ReplyEmail | Reset;

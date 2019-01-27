@@ -1,16 +1,19 @@
-<!-- Side Navigation -->
-<nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card" style="z-index:3;width:320px;" id="mySidebar">
-  <app-left-bar></app-left-bar>
-</nav>
+<div *ngIf="email$ | async as e">
+  <!-- Side Navigation -->
+  <nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card" style="z-index:3;width:320px;" id="mySidebar" [ngStyle]="{'display': e.showSitebar }">
+    <app-left-bar></app-left-bar>
+  </nav>
 
-<!-- Modal that pops up when you click on "New Message" -->
-<div id="id01" class="w3-modal" style="z-index:4" [ngStyle]="{'display': id01}">
-  <app-new-email></app-new-email>
+
+  <!-- Modal that pops up when you click on "New Message" -->
+  <div id="id01" class="w3-modal" style="z-index:4" [ngStyle]="{'display': e.newEmail === true ? 'block' : 'none' }">
+    <app-new-email></app-new-email>
+  </div>
+
+
+  <!-- Overlay effect when opening the side navigation on small screens -->
+  <div class="w3-overlay w3-hide-large w3-animate-opacity" (click)="isShowSiteBar('none')" style="cursor:pointer" title="Close Sidemenu" id="myOverlay" [ngStyle]="{'display': e.showSitebar }"></div>
 </div>
-
-<!-- Overlay effect when opening the side navigation on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" (click)="isShowSiteBar('none')" style="cursor:pointer" title="Close Sidemenu" id="myOverlay"></div>
-
 <!-- Page content -->
 <app-content></app-content>
 

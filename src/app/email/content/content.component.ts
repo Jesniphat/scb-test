@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RootScopeService } from 'src/app/services/root-scope.service';
+import { Store } from '@ngrx/store';
+import { EmailState } from '../../interfaces/emailState';
+import * as EmailActions from '../../actions/email.action';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-content',
@@ -7,17 +10,25 @@ import { RootScopeService } from 'src/app/services/root-scope.service';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit {
+  public emailContent$: Observable<any>;
 
-  constructor(private rootScope: RootScopeService) { }
+  constructor(private store_email: Store<EmailState>) {
+    this.emailContent$ = this.store_email.select('email');
+  }
 
   ngOnInit() {
   }
 
   public openSiteBar(): void {
-    this.rootScope.showSiteBar('block');
+    this.store_email.dispatch(new EmailActions.ShowSitebar('block'));
   }
 
   public newEmail(): void {
-    this.rootScope.newEmailShow(true);
+    this.store_email.dispatch(new EmailActions.NewEmail(true));
+  }
+
+  public reply(to: string, subject: string, body: string): void {
+    this.store_email.dispatch(new EmailActions.ReplyEmail({to: to, subject: subject, body: body }));
+    this.store_email.dispatch(new EmailActions.NewEmail(true));
   }
 }

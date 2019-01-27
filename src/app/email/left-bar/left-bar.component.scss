@@ -38,3 +38,67 @@
     min-height: 100%;
     border-left: 1px solid #ccc;
 }
+
+.email-name {
+    font-size: 12px;
+    margin: 0px;
+    width : 100px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.email-subject {
+    font-size: 10px;
+    margin: 0px;
+    width : 100px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.email-content {
+    font-size: 10px;
+    margin: 0px;
+    color: rgb(99, 96, 96);
+    width : 190px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.email-icon {
+    width: 29px;
+    height: 30px;
+    text-align: center;
+    color: white;
+    padding: 5px 0px 0px 0px;
+}
+
+.sitebar-lists {
+    position: relative;
+}
+
+div.sitebar-lists i {
+    visibility: hidden;
+}
+
+div.sitebar-lists:hover i {
+    visibility: visible;
+}
+
+.icon-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 3px;
+}
+
+.minispec {
+    margin-right: 3px;
+}
+
+.right-icon {
+    font-size: 12px;
+    color: rgb(180, 178, 178);
+}

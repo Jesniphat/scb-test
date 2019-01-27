@@ -1,5 +1,5 @@
-import { Email } from '../models/email.model';
+import { EmailAction } from '../models/email-action.model';
 
 export interface EmailState {
-  email: Email;
+  email: EmailAction;
 }

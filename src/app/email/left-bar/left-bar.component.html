@@ -2,43 +2,33 @@
   <div class="mini-sitebar">
     <div class="menu-left">
       <div class="w3-bar-item w3-button w3-large" (click)="newEmail()"><i class="fa fa-pencil"></i></div>
-      <a href="#" class="w3-bar-item w3-button w3-large"><i class="fa fa-paper-plane w3-margin-right"></i></a>
-      <a href="#" class="w3-bar-item w3-button w3-large"><i class="fa fa-hourglass-end w3-margin-right"></i></a>
-      <a href="#" class="w3-bar-item w3-button w3-large"><i class="fa fa-trash w3-margin-right"></i></a>
+      <div class="w3-bar-item w3-button w3-large" (click)="inboxEmail()"><i class="fa fa-inbox"></i></div>
+      <div class="w3-bar-item w3-button w3-large" (click)="sendedEmail()"><i class="fa fa-paper-plane"></i></div>
+      <!-- <a href="#" class="w3-bar-item w3-button w3-large"><i class="fa fa-hourglass-end w3-margin-right"></i></a> -->
+      <div class="w3-bar-item w3-button w3-large" (click)="deletedEmail()"><i class="fa fa-trash"></i></div>
     </div>
   </div>
   <div class="main-sitebar">
     <div class="w3-bar-item w3-border-bottom w3-large nav-site">
-      <span><b>Inbox</b></span>
+      <span [ngStyle]="{'font-size': '13px'}"><b>Inbox</b></span>
     </div>
     <div class="w3-bar-item empty"></div>
-    <a *ngFor="let item of navList" class="w3-bar-item w3-button">
-      {{item.i}}
-    </a>
-    <a href="javascript:void(0)" onclick="w3_close()" title="Close Sidemenu" 
-    class="w3-bar-item w3-button w3-hide-large w3-large">Close <i class="fa fa-remove"></i></a>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-dark-grey w3-button w3-hover-black w3-left-align" onclick="document.getElementById('id01').style.display='block'">New Message <i class="w3-padding fa fa-pencil"></i></a>
-    <a id="myBtn" onclick="myFunc('Demo1')" href="javascript:void(0)" class="w3-bar-item w3-button"><i class="fa fa-inbox w3-margin-right"></i>Inbox (3)<i class="fa fa-caret-down w3-margin-left"></i></a>
-    <div id="Demo1" class="w3-hide w3-animate-left">
-      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="openMail('Borge');w3_close();" id="firstTab">
-        <div class="w3-container">
-          <img class="w3-round w3-margin-right" src="/w3images/avatar3.png" style="width:15%;"><span class="w3-opacity w3-large">Borge Refsnes</span>
-          <h6>Subject: Remember Me</h6>
-          <p>Hello, i just wanted to let you know that i'll be home at...</p>
+    <div *ngFor="let item of navList" class="w3-row w3-bar-item w3-button w3-hover-light-grey w3-border-bottom sitebar-lists" id={{item.id}}>
+      <div class="icon-top-right">
+          <span class="minispec right-icon" (click)="remove(item)"><i class="fa fa-trash-o"></i></span>
+          <span class="right-icon" (click)="markread(item)"><i class="fa fa-envelope-o"></i></span>
+      </div>
+      <div (click)="read(item)">
+        <div class="w3-col s2 m2 l2">
+          <div *ngIf="!item.img" class="w3-bar-item w3-circle email-icon" [ngStyle]="{'background-color': item.color}">{{item.short}}</div>
+          <div *ngIf="item.img" class="w3-bar-item w3-circle email-icon"><img height="30px" src={{item.img}} /></div>
         </div>
-      </a>
-        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="openMail('Jane');w3_close();">
-        <div class="w3-container">
-          <img class="w3-round w3-margin-right" src="/w3images/avatar5.png" style="width:15%;"><span class="w3-opacity w3-large">Jane Doe</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        <div class="w3-col s10 m10 l10">
+          <p class="email-name" [ngStyle]="{'font-weight': (item.read !== true) ? 'bold' : 'normal'}">{{item.from.name}}</p>
+          <p class="email-subject" [ngStyle]="{'font-weight': (item.read !== true) ? 'bold' : 'normal'}">{{item.subject}}</p>
+          <p class="email-content" [ngStyle]="{'font-weight': (item.read !== true) ? 'bold' : 'normal'}">{{item.body}}</p>
         </div>
-      </a>
-      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="openMail('John');w3_close();">
-        <div class="w3-container">
-          <img class="w3-round w3-margin-right" src="/w3images/avatar2.png" style="width:15%;"><span class="w3-opacity w3-large">John Doe</span>
-          <p>Welcome!</p>
-        </div>
-      </a>
+      </div>
     </div>
   </div>
 </div>

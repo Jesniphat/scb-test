@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { EmailRoutingModule } from './email-routing.module';
 import { LeftBarComponent } from './left-bar/left-bar.component';
@@ -10,14 +11,19 @@ import { EmailComponent } from './email.component';
 // ngrx
 import { StoreModule } from '@ngrx/store';
 import { emailReducer } from '../reducers/email.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [LeftBarComponent, ContentComponent, NewEmailComponent, EmailComponent],
   imports: [
     CommonModule,
     EmailRoutingModule,
+    FormsModule,
     StoreModule.forRoot({
-      post: emailReducer, /// <--- add reducer here
+      email: emailReducer, /// <--- add reducer here
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10 // number of states to retain
     })
   ]
 })

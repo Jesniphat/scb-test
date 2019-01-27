@@ -1,21 +1,37 @@
 
   <div class="w3-modal-content w3-animate-zoom">
-    <div class="w3-container w3-padding w3-red">
-       <span (click)="close()" class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
-      <h2>Send Mail</h2>
+    <div class="w3-container w3-padding">
+       <span (click)="close()" class="w3-button w3-right"><i class="fa fa-remove"></i></span>
+      <h4>Send Mail</h4>
     </div>
     <div class="w3-panel">
-      <label>To</label>
-      <input class="w3-input w3-border w3-margin-bottom" type="text">
-      <label>From</label>
-      <input class="w3-input w3-border w3-margin-bottom" type="text">
-      <label>Subject</label>
-      <input class="w3-input w3-border w3-margin-bottom" type="text">
-      <input class="w3-input w3-border w3-margin-bottom" style="height:150px" placeholder="What's on your mind?">
-      <div class="w3-section">
-        <a class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'">Cancel  <i class="fa fa-remove"></i></a>
-        <a class="w3-button w3-light-grey w3-right" onclick="document.getElementById('id01').style.display='none'">Send  <i class="fa fa-paper-plane"></i></a> 
-      </div>    
+      <form class="w3-container" #sendingForm="ngForm">
+        <label>To</label>
+        <label *ngIf="email.errors && (email.dirty || email.touched)" style="color: red;">
+            <label [hidden]="!email.errors.required">
+              * Email is required
+            </label>
+            <label [hidden]="!email.errors.email">
+              * Email must be email.
+            </label>
+          </label>
+        <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter Username" [(ngModel)]="sending.to.email" #email="ngModel" name="email" required email />
+        <!-- <label>From</label>
+        <input class="w3-input w3-border w3-margin-bottom" type="text"> -->
+        <label>Subject</label>
+        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Subject" [(ngModel)]="sending.subject" #subject="ngModel" name="subject" />
+        <label [hidden]="body.valid || body.pristine" style="color: red;">
+          * Content is required
+        </label>
+        <textarea class="w3-input w3-border w3-margin-bottom" style="height:150px" placeholder="What's on your mind?"
+         [(ngModel)]="sending.body" #body="ngModel" name="body" required
+        >
+        </textarea>
+        <div class="w3-section">
+          <a class="w3-button w3-red" (click)="cancel()">Cancel  <i class="fa fa-remove"></i></a>
+          <button class="w3-button w3-light-grey w3-right" (click)="sendEmail()" [disabled]="sendingForm.form.invalid">Send  <i class="fa fa-paper-plane"></i></button> 
+        </div>    
+      </form>
     </div>
   </div>
 

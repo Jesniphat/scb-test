@@ -1,11 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Email } from '../models/email.model';
 import { EmailState } from '../interfaces/emailState';
-
-import { RootScopeService} from '../services/root-scope.service';
-import { Subscriber } from 'rxjs';
+import * as EmailActions from '../actions/email.action';
 
 @Component({
   selector: 'app-email',
@@ -13,33 +10,20 @@ import { Subscriber } from 'rxjs';
   styleUrls: ['./email.component.scss']
 })
 export class EmailComponent implements OnInit, OnDestroy {
-  public email$: any;
-  public siteBar$: any;
+  public email$: Observable<any>;
 
-  public id01 = 'none';
-
-  constructor(private rootScope: RootScopeService) { }
-
-  ngOnInit() {
-    this.email$ = this.rootScope.newEmail$.subscribe(data => this.newEmail(data));
-    this.siteBar$ = this.rootScope.showSiteBar$.subscribe(data => this.isShowSiteBar(data));
-  }
-
-  public newEmail(isShow: boolean): void {
-    if (isShow) {
-      this.id01 = 'block';
-    } else {
-      this.id01 = 'none';
+  constructor(
+    private store_email: Store<EmailState>
+    ) {
+      this.email$ = this.store_email.select('email');
     }
-  }
+
+  ngOnInit() { }
 
   public isShowSiteBar(style: string): void {
-    document.getElementById('mySidebar').style.display = style;
-    document.getElementById('myOverlay').style.display = style;
+    this.store_email.dispatch(new EmailActions.ShowSitebar(style));
   }
 
-  public ngOnDestroy(): void {
-    this.email$.unsubscribe();
-  }
+  public ngOnDestroy(): void { }
 
 }
