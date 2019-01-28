@@ -4,6 +4,8 @@ import { EmailComponent } from './email.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { emailReducer } from '../reducers/email.reducer';
+import { RootScopeService } from '../services/root-scope.service';
+import { AlertsService } from '../services/alerts.service';
 
 describe('EmailComponent', () => {
   let component: EmailComponent;
@@ -19,12 +21,18 @@ describe('EmailComponent', () => {
         StoreModule.forRoot({
           email: emailReducer, /// <--- add reducer here
         })
+      ],
+      providers: [
+        AlertsService
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
+    const alerts: AlertsService = TestBed.get(AlertsService);
+    spyOn(alerts, 'alerts$');
+
     fixture = TestBed.createComponent(EmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
