@@ -188,8 +188,6 @@ public getEmail(id: number): Observable<Email> {
  * @return void
  */
   private showAlert(message: string): void {
-    const alert = this.alert.alerts$.subscribe(data => {});
     this.alert.danger(message);
-    alert.unsubscribe();
   }
 }
