@@ -12,11 +12,10 @@ import { Observable } from 'rxjs';
 export class ContentComponent implements OnInit {
   public emailContent$: Observable<any>;
 
-  constructor(private store_email: Store<EmailState>) {
-    this.emailContent$ = this.store_email.select('email');
-  }
+  constructor(private store_email: Store<EmailState>) { }
 
   ngOnInit() {
+    this.emailContent$ = this.store_email.select('email');
   }
 
   public openSiteBar(): void {

@@ -161,7 +161,9 @@ public getEmail(id: number): Observable<Email> {
       this.log(`${operation} failed: ${error.message}`);
 
       // alert error
-      this.alert.danger(error.message);
+      if (error.message) {
+        this.showAlert(error.message);
+      }
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -176,5 +178,18 @@ public getEmail(id: number): Observable<Email> {
  **/
   private log(message: string): void {
     console.log(`EmailService: ${message}`);
+  }
+
+/**
+ * Show error alert
+ *
+ * @param message: string
+ * @access private
+ * @return void
+ */
+  private showAlert(message: string): void {
+    const alert = this.alert.alerts$.subscribe(data => {});
+    this.alert.danger(message);
+    alert.unsubscribe();
   }
 }

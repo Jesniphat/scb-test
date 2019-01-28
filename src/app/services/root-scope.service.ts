@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscribable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs';
 
 @Injectable({

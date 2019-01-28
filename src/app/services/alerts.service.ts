@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class AlertsService {
   // Observable navItem source
   // public data:any;
   public alerts$: Observable<any>;
-  private _alerts: any;
+  private _alerts: Subscriber<any>;
 
   constructor() {
     this.alerts$ = new Observable(observer => this._alerts = observer);

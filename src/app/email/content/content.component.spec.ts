@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContentComponent } from './content.component';
+import { StoreModule } from '@ngrx/store';
+import { emailReducer } from '../../reducers/email.reducer';
 
 describe('ContentComponent', () => {
   let component: ContentComponent;
@@ -8,7 +10,12 @@ describe('ContentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentComponent ]
+      declarations: [ ContentComponent ],
+      imports: [
+        StoreModule.forRoot({
+          email: emailReducer, /// <--- add reducer here
+        })
+      ]
     })
     .compileComponents();
   }));

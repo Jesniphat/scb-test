@@ -40,7 +40,7 @@ export class LeftBarComponent implements OnInit {
     this.navList = await this.getAllEmail('deleted');
   }
 
-  private async getAllEmail(type: string): Promise<Email[]> {
+  public async getAllEmail(type: string): Promise<Email[]> {
     const responts = await this.api.getEmailsByType(type).toPromise();
     responts.map(email => {
       if (email.type === 'send') {
