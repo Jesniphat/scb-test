@@ -16,18 +16,26 @@ export class AlertsService {
   }
 
   public success(messages: any) {
-    this._alerts.next({type: 'success', message: messages});
+    if (messages && this._alerts != null) {
+      this._alerts.next({type: 'success', message: messages});
+    }
   }
 
   public info(messages: any) {
-    this._alerts.next({type: 'info', message: messages});
+    if (messages && this._alerts != null) {
+      this._alerts.next({type: 'info', message: messages});
+    }
   }
 
   public warning(messages: any) {
-    this._alerts.next({type: 'warning', message: messages});
+    if (messages && this._alerts != null) {
+      this._alerts.next({type: 'warning', message: messages});
+    }
   }
 
   public danger(messages: any) {
-    this._alerts.next({type: 'danger', message: messages});
+    if (messages && this._alerts != null) {
+      this._alerts.next({type: 'danger', message: messages});
+    }
   }
 }

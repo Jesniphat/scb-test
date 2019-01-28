@@ -161,8 +161,8 @@ public getEmail(id: number): Observable<Email> {
       this.log(`${operation} failed: ${error.message}`);
 
       // alert error
-      if (error.message) {
-        this.showAlert(error.message);
+      if (error) {
+        this.showAlert(error.body.error);
       }
 
       // Let the app keep running by returning an empty result.
