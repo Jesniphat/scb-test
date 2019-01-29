@@ -162,7 +162,7 @@ public getEmail(id: number): Observable<Email> {
 
       // alert error
       if (error) {
-        this.showAlert(error.body.error);
+        this.showAlert(error.message || 'Can\'t request to api.');
       }
 
       // Let the app keep running by returning an empty result.
