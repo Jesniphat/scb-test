@@ -41,13 +41,15 @@ export class ApiService {
  * @access public
  * @return Observable
  **/
-public getEmailsByType(type: string): Observable<Email[]> {
+public async getEmailsByType(type: string): Promise<Email[]> {
   const url = `${this.emailsUrl}/?type=${type}`;
-  return this.http.get<Email[]>(url)
+  const response = await this.http.get<Email[]>(url)
     .pipe(
       tap(_ => this.log('fetched emails')),
       catchError(this.handleError('getEmails', []))
-    );
+    ).toPromise();
+
+    return response || [];
 }
 
 /**
