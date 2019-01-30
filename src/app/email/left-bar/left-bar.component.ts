@@ -41,7 +41,7 @@ export class LeftBarComponent implements OnInit {
   }
 
   public async getAllEmail(type: string): Promise<Email[]> {
-    const responts = await this.api.getEmailsByType(type);
+    const responts = await this.api.getEmailsByType(type).toPromise();
     responts.map(email => {
       if (email.type === 'send') {
         email.from = email.to;

@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Observable, of } from 'rxjs';
 
 import { LeftBarComponent } from './left-bar.component';
 import { StoreModule } from '@ngrx/store';
@@ -16,16 +17,15 @@ describe('LeftBarComponent', () => {
   const mockApi = [
     {
       id: 1,
-      from : {
-        name : 'Now TV',
-        email : 'nowtv@test.com'
-      },
-      subject : 'Grab another Pass, you need to be watching...',
-      body : 'Oscar winners Sir Anthony Hopkins and Ed Harris join an impressive cast boasting '
-      + 'the likes of Thandie Newton, James Marsden and Jeffrey Wright.',
-      read: false,
-      datetime: 'Jan 27, 2019',
-      type: 'receipt'
+        from : {
+          name : 'Jese Test',
+          email : 'test@test.com'
+        },
+        subject : 'test',
+        body : 'test',
+        read: false,
+        datetime: 'Jan 27, 2019',
+        type: 'receipt'
     }
   ];
 
@@ -45,7 +45,8 @@ describe('LeftBarComponent', () => {
     .compileComponents();
 
     const ApiServiceSpyObj = TestBed.get(ApiService);
-    const mockApiPromise = new Promise((resolve, reject) => { resolve(mockApi); });
+    // const mockApiPromise = new Promise((resolve, reject) => { resolve(mockApi); });
+    const mockApiPromise: Observable<any> = of(mockApi);
     ApiServiceSpyObj.getEmailsByType.and.returnValue(mockApiPromise);
   }));
 
@@ -61,6 +62,7 @@ describe('LeftBarComponent', () => {
 
   it('should get data list', async () => {
     const result = await component.inboxEmail();
+    console.log(component.navList);
     expect(component.navList.length).toBe(1);
   });
 

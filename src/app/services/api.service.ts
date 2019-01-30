@@ -41,16 +41,14 @@ export class ApiService {
  * @access public
  * @return Observable
  **/
-public async getEmailsByType(type: string): Promise<Email[]> {
-  const url = `${this.emailsUrl}/?type=${type}`;
-  const response = await this.http.get<Email[]>(url)
-    .pipe(
-      tap(_ => this.log('fetched emails')),
-      catchError(this.handleError('getEmails', []))
-    ).toPromise();
-
-    return response || [];
-}
+  public getEmailsByType(type: string): Observable<Email[]> {
+    const url = `${this.emailsUrl}/?type=${type}`;
+    return this.http.get<Email[]>(url)
+      .pipe(
+        tap(_ => this.log('fetched emails')),
+        catchError(this.handleError('getEmails', []))
+      );
+  }
 
 /**
  * GET email by id. Return `undefined` when id not found
