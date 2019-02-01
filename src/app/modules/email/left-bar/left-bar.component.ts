@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { EmailState } from '../../interfaces/emailState';
-import * as EmailActions from '../../actions/email.action';
-import { RootScopeService } from '../../services/root-scope.service';
-import { ApiService } from '../../services/api.service';
-import { Email } from '../../models/email.model';
-import { Color } from 'src/app/interfaces/Color';
+import { EmailState } from '../../../interfaces/emailState';
+import * as EmailActions from '../../../actions/email.action';
+import { ApiService } from '../../../services/api.service';
+import { Email } from '../../../models/email.model';
+import { Color } from '../../../interfaces/Color';
 
 @Component({
   selector: 'app-left-bar',
@@ -15,6 +14,9 @@ import { Color } from 'src/app/interfaces/Color';
 export class LeftBarComponent implements OnInit {
   public navList = [];
   public action: any;
+  public isShowCheck = false;
+  public isId = 0;
+
   constructor(
     private store_email: Store<EmailState>,
     private api: ApiService
@@ -55,6 +57,7 @@ export class LeftBarComponent implements OnInit {
           email.short += email.from.name.substr(email.from.name.indexOf(' ') + 1, 1);
         }
       }
+      email.check = false;
       return email;
     });
 
@@ -63,7 +66,9 @@ export class LeftBarComponent implements OnInit {
 
   public async read(item: Email): Promise<void> {
     this.navList = this.navList.filter((email) => {
+      email.check = false;
       email.read = email.id === item.id || email.read ? true : false;
+      this.isId = item.id;
       return email;
     });
 
@@ -76,6 +81,7 @@ export class LeftBarComponent implements OnInit {
 
     await this.store_email.dispatch(new EmailActions.ReadEmail(item));
     await this.api.updateEmail(item).toPromise();
+    await this.countCheck();
   }
 
   public async remove(item: Email): Promise<void> {
@@ -97,6 +103,36 @@ export class LeftBarComponent implements OnInit {
       return email;
     });
     await this.api.updateEmail(item).toPromise();
+  }
+
+  public async chicking(event: any, item: Email): Promise<void> {
+    this.navList = await this.navList.filter((email) => {
+      if (email.id === item.id) {
+        email.check = event.target.checked;
+      }
+      return email;
+    });
+    await this.countCheck();
+  }
+
+  public async clearCheck() {
+    this.navList = await this.navList.filter(email => {
+      email.check = false;
+      return email;
+    });
+
+    await this.countCheck();
+  }
+
+  public async countCheck(): Promise<void> {
+    let count = 0;
+    await this.navList.forEach(email => {
+      if (email.check) {
+        count++;
+      }
+    });
+
+    this.isShowCheck = count > 0 ? true : false;
   }
 
 }

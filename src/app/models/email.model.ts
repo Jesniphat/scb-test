@@ -16,4 +16,5 @@ export interface Email {
   type: string;
   color?: string;
   short?: string;
+  check?: boolean;
 }

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EmailComponent } from './email.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
-import * as emailReducer from '../reducers/email.reducer';
+import * as emailReducer from '../../reducers/email.reducer';
 
 describe('EmailComponent', () => {
   let component: EmailComponent;

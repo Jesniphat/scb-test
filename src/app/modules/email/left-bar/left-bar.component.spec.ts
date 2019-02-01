@@ -3,10 +3,10 @@ import { Observable, of } from 'rxjs';
 
 import { LeftBarComponent } from './left-bar.component';
 import { StoreModule } from '@ngrx/store';
-import { emailReducer } from '../../reducers/email.reducer';
+import { emailReducer } from '../../../reducers/email.reducer';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../../services/api.service';
 
 describe('LeftBarComponent', () => {
   let component: LeftBarComponent;
