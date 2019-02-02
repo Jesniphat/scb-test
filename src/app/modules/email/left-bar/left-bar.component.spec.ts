@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { LeftBarComponent } from './left-bar.component';
@@ -34,6 +35,7 @@ describe('LeftBarComponent', () => {
       declarations: [ LeftBarComponent ],
       imports: [
         HttpClientModule,
+        FormsModule,
         StoreModule.forRoot({
           email: emailReducer
         })

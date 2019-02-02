@@ -19,7 +19,11 @@
           <span class="right-icon" (click)="markread(item)"><i class="fa fa-envelope-o"></i></span>
       </div>
       <div class="w3-bar-item w3-circle w3-display-topleft email-icon check-icon" [ngStyle]="{'visibility': (isShowCheck == true || isId == item.id ? 'visible' : 'hidden')}">
-        <input type="checkbox" [(ngModel)]="item.check" (click)="chicking($event, item)"/>
+        <!-- <input type="checkbox" [(ngModel)]="item.check" (click)="chicking($event, item)"/> -->
+        <label class="cb-container">
+          <input type="checkbox"  [(ngModel)]="item.check" (click)="chicking($event, item)">
+          <span class="checkmark"></span>
+        </label>
       </div>
       <div (click)="read(item)">
         <div class="w3-col s2 m2 l2">

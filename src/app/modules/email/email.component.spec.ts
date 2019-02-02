@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { EmailComponent } from './email.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -16,6 +17,7 @@ describe('EmailComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA
       ],
       imports: [
+        FormsModule,
         StoreModule.forRoot({
           email: combineReducers(emailReducer.emailReducer), /// <--- add reducer here
         })
