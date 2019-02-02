@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { EmailState } from '../../interfaces/emailState';
-import * as EmailActions from '../../actions/email.action';
+import { EmailState } from '../../../interfaces/emailState';
+import * as EmailActions from '../../../actions/email.action';
 import { Observable } from 'rxjs';
 
 @Component({

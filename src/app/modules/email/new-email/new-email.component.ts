@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { EmailState } from '../../interfaces/emailState';
-import * as EmailActions from '../../actions/email.action';
-import { Email } from '../../models/email.model';
-import { ApiService } from '../../services/api.service';
-import { AlertsService } from '../../services/alerts.service';
+import { EmailState } from '../../../interfaces/emailState';
+import * as EmailActions from '../../../actions/email.action';
+import { Email } from '../../../models/email.model';
+import { ApiService } from '../../../services/api.service';
+import { AlertsService } from '../../../services/alerts.service';
 
 import * as moment from 'moment';
 

@@ -1,17 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContentComponent } from './content.component';
+import { NewEmailComponent } from './new-email.component';
 import { StoreModule } from '@ngrx/store';
-import { emailReducer } from '../../reducers/email.reducer';
+import { emailReducer } from '../../../reducers/email.reducer';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
-describe('ContentComponent', () => {
-  let component: ContentComponent;
-  let fixture: ComponentFixture<ContentComponent>;
+describe('NewEmailComponent', () => {
+  let component: NewEmailComponent;
+  let fixture: ComponentFixture<NewEmailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentComponent ],
+      declarations: [ NewEmailComponent ],
       imports: [
+        FormsModule,
+        HttpClientModule,
         StoreModule.forRoot({
           email: emailReducer, /// <--- add reducer here
         })
@@ -21,7 +25,7 @@ describe('ContentComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContentComponent);
+    fixture = TestBed.createComponent(NewEmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

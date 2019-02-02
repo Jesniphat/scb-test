@@ -1,12 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 import { LeftBarComponent } from './left-bar.component';
 import { StoreModule } from '@ngrx/store';
-import { emailReducer } from '../../reducers/email.reducer';
+import { emailReducer } from '../../../reducers/email.reducer';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../../services/api.service';
 
 describe('LeftBarComponent', () => {
   let component: LeftBarComponent;
@@ -34,6 +35,7 @@ describe('LeftBarComponent', () => {
       declarations: [ LeftBarComponent ],
       imports: [
         HttpClientModule,
+        FormsModule,
         StoreModule.forRoot({
           email: emailReducer
         })
