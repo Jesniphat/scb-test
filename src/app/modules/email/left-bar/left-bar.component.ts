@@ -66,8 +66,9 @@ export class LeftBarComponent implements OnInit {
 
   public async read(item: Email): Promise<void> {
     this.navList = this.navList.filter((email) => {
-      email.check = false;
-      email.read = email.id === item.id || email.read ? true : false;
+      // email.check = false;
+      // email.read = email.id === item.id || email.read ? true : false;
+      email = {...email, check: false, read: email.id === item.id || email.read ? true : false};
       this.isId = item.id;
       return email;
     });

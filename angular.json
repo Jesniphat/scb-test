@@ -141,5 +141,8 @@
       }
     }
   },
-  "defaultProject": "scb-test"
+  "defaultProject": "scb-test",
+  "cli": {
+    "analytics": "ea51417a-1b8e-45d8-b12f-9ab9adf6c536"
+  }
 }
